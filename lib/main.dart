@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hermanos/screens/cart/screen.dart';
+import 'package:hermanos/screens/auth/screen.dart';
 import 'package:hermanos/services/product/service.dart';
 import 'package:hermanos/state/cart_notifier.dart';
 
@@ -29,6 +29,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Cart());
+        home: Login());
   }
 }
