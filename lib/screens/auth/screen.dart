@@ -66,15 +66,12 @@ class Login extends StatelessWidget {
 
     try {
       final result = await _authService.login(username, password);
-      // Check if login was successful
       if (result.containsKey('token')) {
-        // Navigate to home screen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => Home()),
         );
       } else {
-        // Show error popup for invalid credentials
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -90,7 +87,6 @@ class Login extends StatelessWidget {
         );
       }
     } catch (e) {
-      // Show error popup for other errors
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

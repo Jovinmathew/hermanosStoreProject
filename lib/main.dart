@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hermanos/screens/login/screen.dart';
+import 'package:hermanos/screens/cart/screen.dart';
 import 'package:hermanos/services/product/service.dart';
+import 'package:hermanos/state/cart_notifier.dart';
 
 import 'services/auth/service.dart';
 
 void setupLocator() {
+  // final GetIt locator = GetIt.asNewInstance();
   GetIt.I.registerLazySingleton(() => ProductService());
   GetIt.I.registerLazySingleton(() => AuthService());
+  GetIt.I.registerSingleton(CartNotifier());
 }
 
 void main() {
@@ -26,6 +29,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Login());
+        home: Cart());
   }
 }

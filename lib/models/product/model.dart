@@ -5,6 +5,7 @@ class Product {
   final String category;
   final String description;
   final String image;
+  int quantity;
 
   Product({
     required this.id,
@@ -13,6 +14,7 @@ class Product {
     required this.category,
     required this.description,
     required this.image,
+    this.quantity = 0,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -33,5 +35,10 @@ class Product {
         'category': category,
         'description': description,
         'image': image,
+        'quantity': quantity,
       };
+
+  void updateQuantity(int newQuantity) {
+    quantity = newQuantity;
+  }
 }
