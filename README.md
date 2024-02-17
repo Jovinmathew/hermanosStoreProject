@@ -1,16 +1,41 @@
-# hermanos
+# Hermanos
 
-A new Flutter project.
+## Description
 
-## Getting Started
+Hermanos is a store app that utilizes the Fake Store API to display and manage products. It allows users to browse various products, view details, add them to the cart, and make purchases.
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+To install and run the Hermanos app, follow these steps:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the repository:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+$ git clone https://github.com/your-username/hermanos.git
+
+```
+
+Navigate to the project directory:
+```bash
+$ cd hermanos
+```
+
+Run the Flutter project:
+```bash
+$ flutter run
+```
+
+Usage
+The Hermanos app provides a standard shopping experience where users can browse products, add them to the cart, and make purchases.
+
+Known Issue: The state does not update when navigating back from certain screens.
+
+Screenshots
+Include screenshots or demo images/videos of your project in action. This section helps users visualize what your project looks like and how it works.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+```vbnet
+
+Feel free to customize it further based on your project's specific details and requirements. You can add screenshots, videos, or any other relevant information to enhance the README file.
+```
