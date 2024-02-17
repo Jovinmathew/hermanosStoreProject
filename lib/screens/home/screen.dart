@@ -4,6 +4,7 @@ import 'package:hermanos/services/product/service.dart';
 
 import '../../components/bottomSheet/component.dart';
 import '../../components/productList/component.dart';
+import '../cart/screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -52,7 +53,10 @@ class _HomeState extends State<Home> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/cart');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Cart()),
+              );
             },
             icon: Icon(Icons.shopping_cart),
           ),

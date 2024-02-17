@@ -39,17 +39,18 @@ class ProductService {
 
   List<Product> _extractProducts(http.Response response) {
     final products = <Product>[];
-    if (response.statusCode == 401) {
+    if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       for (var item in jsonData) {
         products.add(Product.fromJson(item));
       }
     }
+    print('${products.length} total number of requests');
     return products;
   }
 
   Product? _extractProduct(http.Response response) {
-    if (response.statusCode == 401) {
+    if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       return Product.fromJson(jsonData);
     }
@@ -58,7 +59,7 @@ class ProductService {
 
   List<String> _extractCategories(http.Response response) {
     final categories = <String>[];
-    if (response.statusCode == 401) {
+    if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       for (var item in jsonData) {
         categories.add(item);
