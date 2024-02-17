@@ -1,41 +1,48 @@
 import 'package:flutter/material.dart';
-
 import '../models/product/model.dart';
 
 class CartNotifier extends ChangeNotifier {
-  final List<Product> _cartItems = [
-    Product(
-        id: 1,
-        title: 'Product 1',
-        price: 10,
-        image: 'https://via.placeholder.com/150',
-        category: 'category 1',
-        description: 'description one'),
-    Product(
-        id: 2,
-        title: 'Product 2',
-        price: 20,
-        image: 'https://via.placeholder.com/150',
-        category: 'category 2',
-        description: 'description two'),
-    Product(
-        id: 3,
-        title: 'Product 3',
-        price: 15,
-        image: 'https://via.placeholder.com/150',
-        category: 'category 3',
-        description: 'description three'),
-  ];
+  final List<Product> _cartItems = [];
 
   List<Product> get cartItems => _cartItems;
 
   void addToCart(Product product) {
-    _cartItems.add(product);
+    final existingProductIndex =
+        _cartItems.indexWhere((p) => p.id == product.id);
+    if (existingProductIndex != -1) {
+      _cartItems[existingProductIndex].quantity += 1;
+    } else {
+      _cartItems.add(Product(
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+        description: product.description,
+        quantity: 1,
+      ));
+    }
     notifyListeners();
   }
 
+  int getQuantity(Product product) {
+    final existingProductIndex =
+        _cartItems.indexWhere((p) => p.id == product.id);
+    if (existingProductIndex != -1) {
+      return _cartItems[existingProductIndex].quantity;
+    }
+    return 0;
+  }
+
   void removeFromCart(Product product) {
-    _cartItems.remove(product);
+    final existingProductIndex =
+        _cartItems.indexWhere((p) => p.id == product.id);
+    if (existingProductIndex != -1) {
+      _cartItems[existingProductIndex].quantity -= 1;
+      if (_cartItems[existingProductIndex].quantity <= 0) {
+        _cartItems.removeAt(existingProductIndex);
+      }
+    }
     notifyListeners();
   }
 
@@ -44,15 +51,10 @@ class CartNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFromCartList(Product item) {
-    _cartItems.remove(item);
-    notifyListeners();
-  }
-
   double getCartTotal() {
     double total = 0;
     for (var product in _cartItems) {
-      total += product.price;
+      total += product.price * product.quantity;
     }
     return total;
   }
