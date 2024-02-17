@@ -30,9 +30,6 @@ The Hermanos app provides a standard shopping experience where users can browse 
 
 Known Issue: The state does not update when navigating back from certain screens.
 
-Screenshots
-Include screenshots or demo images/videos of your project in action. This section helps users visualize what your project looks like and how it works.
-
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 ```vbnet
