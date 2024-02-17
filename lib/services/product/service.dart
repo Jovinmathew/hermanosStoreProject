@@ -5,23 +5,31 @@ import 'package:hermanos/constants/api.dart';
 import 'package:hermanos/models/product/model.dart';
 
 class ProductService {
+  static const productsUrl = '$baseUrl/products';
+
   Future<List<Product>> getAll() async {
-    final response = await _get('$baseUrl/products');
+    final response = await _get(productsUrl);
     return _extractProducts(response);
   }
 
   Future<Product?> getSingle(int id) async {
-    final response = await _get('$baseUrl/products/$id');
+    final response = await _get('$productsUrl/$id');
     return _extractProduct(response);
   }
 
   Future<List<String>> getCategories() async {
-    final response = await _get('$baseUrl/products/categories');
+    final response = await _get('$productsUrl/categories');
     return _extractCategories(response);
   }
 
   Future<List<Product>> getByCategory(String category) async {
-    final response = await _get('$baseUrl/products/category/$category');
+    final response = await _get('$productsUrl/category/$category');
+    return _extractProducts(response);
+  }
+
+  Future<List<Product>> sort(String sortBy, String url) async {
+    print('$url?sort=$sortBy');
+    final response = await _get('$url?sort=$sortBy');
     return _extractProducts(response);
   }
 
