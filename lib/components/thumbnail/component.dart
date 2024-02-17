@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class StyledImage extends StatelessWidget {
+class Thumbnail extends StatelessWidget {
   final String imageUrl;
 
-  const StyledImage({Key? key, required this.imageUrl}) : super(key: key);
+  const Thumbnail({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

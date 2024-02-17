@@ -5,12 +5,12 @@ import 'package:hermanos/constants/api.dart';
 import 'package:hermanos/models/product/model.dart';
 
 class ProductService {
-  Future<List<Product>> getAllProducts() async {
+  Future<List<Product>> getAll() async {
     final response = await _get('$baseUrl/products');
     return _extractProducts(response);
   }
 
-  Future<Product?> getProduct(int id) async {
+  Future<Product?> getSingle(int id) async {
     final response = await _get('$baseUrl/products/$id');
     return _extractProduct(response);
   }
@@ -20,7 +20,7 @@ class ProductService {
     return _extractCategories(response);
   }
 
-  Future<List<Product>> getProductsByCategory(String category) async {
+  Future<List<Product>> getByCategory(String category) async {
     final response = await _get('$baseUrl/products/category/$category');
     return _extractProducts(response);
   }
