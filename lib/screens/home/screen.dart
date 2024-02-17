@@ -42,8 +42,26 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: ProductSearch());
+            },
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
+            icon: Icon(Icons.shopping_cart),
+          ),
+        ],
+      ),
       body: Center(
-        child: ProductList(products: _products),
+        child: _products.isEmpty
+            ? CircularProgressIndicator()
+            : ProductList(products: _products),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -52,6 +70,7 @@ class _HomeState extends State<Home> {
         },
         child: Icon(Icons.tune),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 
@@ -89,6 +108,68 @@ class _HomeState extends State<Home> {
             });
             Navigator.pop(context);
           },
+        );
+      },
+    );
+  }
+}
+
+class ProductSearch extends SearchDelegate<String> {
+  final ProductService _productService = ProductService();
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = '';
+        },
+        icon: Icon(Icons.clear),
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        close(context, '');
+      },
+      icon: Icon(Icons.arrow_back),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return FutureBuilder(
+      future: _productService.getAll(),
+      builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
+        if (snapshot.hasData) {
+          final products = snapshot.data!
+              .where((product) =>
+                  product.title.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+          return ProductList(products: products);
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return FutureBuilder(
+      future: _productService.getAll(),
+      builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
+        if (snapshot.hasData) {
+          final products = snapshot.data!
+              .where((product) =>
+                  product.title.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+          return ProductList(products: products);
+        }
+        return Center(
+          child: CircularProgressIndicator(),
         );
       },
     );
