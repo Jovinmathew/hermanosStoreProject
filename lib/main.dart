@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hermanos/screens/home/screen.dart';
+import 'package:hermanos/screens/login/screen.dart';
 import 'package:hermanos/services/product/service.dart';
+
+import 'services/auth/service.dart';
 
 void setupLocator() {
   GetIt.I.registerLazySingleton(() => ProductService());
+  GetIt.I.registerLazySingleton(() => AuthService());
 }
 
 void main() {
@@ -23,6 +26,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Home());
+        home: Login());
   }
 }

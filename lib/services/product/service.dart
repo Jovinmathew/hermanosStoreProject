@@ -5,7 +5,7 @@ import 'package:hermanos/constants/api.dart';
 import 'package:hermanos/models/product/model.dart';
 
 class ProductService {
-  static const productsUrl = '$baseUrl/products';
+  static const String productsUrl = '$baseUrl/products';
 
   Future<List<Product>> getAll() async {
     final response = await _get(productsUrl);
